@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#101b2c">
+    <title>Mata Uang Vision AI</title>
+    <link rel="stylesheet" href="{{ url_for('static', path='/css/style.css') }}">
+    <script src="{{ url_for('static', path='/js/main.js') }}" defer></script>
+  </head>
+  <body>
+    <header class="navbar">
+      <a class="brand" href="/" aria-label="Mata Uang Vision AI, beranda">
+        <span class="brand-mark" aria-hidden="true">Rp</span>
+        <span>
+          <strong>Mata Uang Vision AI</strong>
+          <small>Deteksi uang secara langsung</small>
+        </span>
+      </a>
+      <div class="status-badge" id="statusBadge" data-state="idle" role="status" aria-live="polite">
+        <span class="status-dot" aria-hidden="true"></span>
+        <span id="statusText">Menyiapkan kamera</span>
+      </div>
+    </header>
+
+    <main class="container">
+      <section class="intro">
+        <p class="eyebrow">PENGHITUNG UANG OTOMATIS</p>
+        <h1>Kenali uang Anda, <span>seketika.</span></h1>
+        <p>Arahkan uang ke kamera. Model AI akan mengenali nominal dan menghitung totalnya secara langsung.</p>
+      </section>
+
+      <div class="dashboard">
+        <section class="video-section card" aria-labelledby="cameraHeading">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">LIVE DETECTION</p>
+              <h2 id="cameraHeading">Tampilan kamera</h2>
+            </div>
+            <span class="live-indicator"><span aria-hidden="true"></span> LIVE</span>
+          </div>
+
+          <div class="video-container" id="videoContainer">
+            <video id="webcam" autoplay playsinline muted aria-label="Tampilan webcam"></video>
+            <canvas id="overlay" aria-hidden="true"></canvas>
+            <div class="camera-placeholder" id="cameraPlaceholder">
+              <span class="camera-icon" aria-hidden="true">⌁</span>
+              <strong>Kamera belum aktif</strong>
+              <span>Izinkan akses kamera pada browser untuk memulai.</span>
+            </div>
+          </div>
+
+          <div class="camera-controls">
+            <label for="cameraSelect">Pilih kamera</label>
+            <select id="cameraSelect" disabled>
+              <option value="">Mencari kamera...</option>
+            </select>
+          </div>
+          <p class="camera-hint">Pastikan uang terlihat jelas dan mendapat pencahayaan yang cukup.</p>
+        </section>
+
+        <aside class="panel-section" aria-label="Ringkasan deteksi">
+          <section class="total-card card" aria-labelledby="totalHeading">
+            <div class="total-card-top">
+              <span class="money-icon" aria-hidden="true">Rp</span>
+              <span class="total-caption" id="totalHeading">TOTAL TERDETEKSI</span>
+            </div>
+            <h2 id="totalAmount" class="total-amount" aria-live="polite">Rp 0</h2>
+            <div class="total-divider"></div>
+            <p class="detected-count"><span id="detectedCount">0</span> lembar terdeteksi</p>
+          </section>
+
+          <section class="list-card card" aria-labelledby="listHeading">
+            <div class="list-heading">
+              <div>
+                <p class="eyebrow">HASIL AI</p>
+                <h2 id="listHeading">Rincian deteksi</h2>
+              </div>
+              <span class="count-pill" id="listCount">0</span>
+            </div>
+            <ul id="detectionList" class="detection-list" aria-live="polite" aria-relevant="additions text">
+              <li class="empty-state">
+                <span class="empty-icon" aria-hidden="true">◎</span>
+                <span>Belum ada uang yang terdeteksi</span>
+              </li>
+            </ul>
+            <p class="list-footnote">Hasil deteksi diperbarui otomatis.</p>
+          </section>
+        </aside>
+      </div>
+
+      <footer class="page-footer">
+        <span class="footer-dot" aria-hidden="true"></span>
+        Pemrosesan gambar dilakukan oleh model YOLO di server lokal Anda.
+      </footer>
+    </main>
+  </body>
+</html>
